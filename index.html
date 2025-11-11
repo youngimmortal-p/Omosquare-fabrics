@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omosquare Fabrics — Shop</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            adire: { light: '#8ABAD3', DEFAULT: '#2E4A7D', dark: '#1C2E4A' },
+            kampala: { light: '#C2A3E0', DEFAULT: '#7B3FA0', accent: '#F4B942' },
+            ankara: { yellow: '#FEC601', red: '#D72638', green: '#007F5F', blue: '#26547C' },
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg1: rgba(46,74,125,0.18);
+      --bg2: rgba(123,63,160,0.12);
+      --bg3: rgba(254,198,1,0.08);
+    }
+    body {
+      background-color: #102030;
+      background-image:
+        radial-gradient(circle at 10% 20%, var(--bg1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 10%, var(--bg2) 0%, transparent 18%),
+        radial-gradient(circle at 50% 80%, var(--bg3) 0%, transparent 25%),
+        linear-gradient(135deg, rgba(10,25,42,0.6), rgba(30,20,50,0.4));
+      background-blend-mode: screen, screen, screen, normal;
+      min-height: 100vh;
+    }
+    .tie-dye {
+      background-image:
+        radial-gradient(circle at 15% 25%, rgba(255,255,255,0.02), transparent 10%),
+        radial-gradient(circle at 70% 15%, rgba(255,255,255,0.02), transparent 12%),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.015), transparent 18%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="text-white antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 backdrop-blur-sm bg-white/6">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-adire to-kampala flex items-center justify-center text-white font-bold">O</div>
+        <div>
+          <h1 class="font-extrabold text-lg md:text-2xl">Omosquare Fabrics</h1>
+          <p class="text-xs text-white/70 -mt-1">Adire • Kampala • Ankara</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="cart-toggle" class="relative bg-white/10 hover:bg-white/20 px-3 py-2 rounded-full">
+          🛒 <span id="cart-count" class="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-semibold rounded-full bg-ankara-red text-white">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <main class="max-w-5xl mx-auto px-4 py-6">
+    <section class="mb-4">
+      <div class="flex flex-wrap mb-5 gap-2 justify-center md:justify-center">
+        <button class="filter-btn px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm" data-cat="all">All</button>
+        <button class="filter-btn px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm" data-cat="adire">Adire</button>
+        <button class="filter-btn px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm" data-cat="kampala">Kampala</button>
+        <button class="filter-btn px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm" data-cat="ankara">Ankara</button>
+      </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section id="product-list" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></section>
+
+    <!-- Contact -->
+    <footer class="mt-10 py-8 text-center text-white/85">
+      <p class="font-semibold mb-2">Contact & Follow</p>
+      <div class="flex justify-center gap-6 mb-3">
+        <a href="https://www.instagram.com/afolayanfunmi?igsh=MW5iaGx0NTU4czZ2" target="_blank" class="underline text-sm">Instagram — Funmi Afolayan</a>
+        <a href="https://tiktok.com/@funmi.afolayan2" target="_blank" class="underline text-sm">TikTok — omosquare outfit</a>
+      </div>
+      <div class="text-xs text-white/70">WhatsApp: <a class="underline" href="https://wa.me/2348088949910" target="_blank">+234 808 894 9910</a></div>
+    </footer>
+  </main>
+
+  <!-- Subtle tie-dye overlay -->
+  <div class="fixed inset-0 tie-dye pointer-events-none"></div>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="fixed inset-0 z-40 hidden">
+    <div class="absolute inset-0 bg-black/50" id="cart-backdrop"></div>
+    <div class="absolute right-4 bottom-4 w-full max-w-md md:max-w-lg lg:max-w-xl bg-white/6 rounded-2xl p-4 backdrop-blur-md">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-lg">Your Cart</h3>
+        <button id="close-cart" class="text-sm px-2 py-1 bg-white/10 rounded">Close</button>
+      </div>
+      <div id="cart-items" class="space-y-3 max-h-72 overflow-auto pb-2"></div>
+      <div class="border-t border-white/10 pt-3 mt-3">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-semibold">Total</span>
+          <span id="cart-total" class="font-bold">₦0</span>
+        </div>
+        <div class="flex gap-2">
+          <button id="clear-cart" class="flex-1 bg-white/10 hover:bg-white/20 py-2 rounded-lg">Clear</button>
+          <button id="cart-checkout" class="flex-1 bg-kampala-accent hover:bg-ankara-yellow text-black font-semibold py-2 rounded-lg">Checkout (WhatsApp)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="store.js"></script>
+</body>
+</html>
