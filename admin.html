@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Omosquare Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body{min-height:100vh;background:linear-gradient(180deg,#071027,#0f1724);color:#fff} </style>
+</head>
+<body class="antialiased">
+  <div class="max-w-xl mx-auto p-4">
+    <header class="mb-4">
+      <h1 class="text-2xl font-bold">Omosquare Admin</h1>
+      <p class="text-sm text-white/70">Login and manage products from your phone.</p>
+    </header>
+
+    <div id="auth-area" class="space-y-3">
+      <div id="auth-forms">
+        <input id="email" class="w-full p-3 rounded bg-white/5 mb-2" placeholder="Owner email" />
+        <input id="password" type="password" class="w-full p-3 rounded bg-white/5 mb-2" placeholder="Password" />
+        <div class="flex gap-2">
+          <button id="login-btn" class="flex-1 bg-ankara-red py-2 rounded font-semibold">Login</button>
+          <button id="create-btn" class="flex-1 bg-white/10 py-2 rounded">Create account</button>
+        </div>
+      </div>
+
+      <div id="signed-in" class="hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <div id="owner-email" class="font-semibold"></div>
+            <div id="owner-uid" class="text-xs text-white/60"></div>
+          </div>
+          <div class="flex gap-2">
+            <button id="logout-btn" class="bg-white/10 px-3 py-2 rounded">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4 border-white/10">
+
+    <div id="admin-panel" class="hidden space-y-3">
+      <h2 class="font-semibold">Add / Edit Product</h2>
+
+      <input id="prod-name" class="w-full p-3 rounded bg-white/5" placeholder="Product name" />
+      <input id="prod-price" type="number" class="w-full p-3 rounded bg-white/5" placeholder="Price (₦)" />
+      <select id="prod-category" class="w-full p-3 rounded bg-white/5">
+        <option value="adire">Adire</option>
+        <option value="kampala">Kampala</option>
+        <option value="ankara">Ankara</option>
+        <option value="fresh">Omosquare Fresh</option>
+        <option value="ready">Ready to Wear</option>
+      </select>
+
+      <div>
+        <label class="text-sm block mb-1">Image (choose from phone)</label>
+        <input id="prod-image" type="file" accept="image/*" class="w-full" />
+        <div id="img-preview" class="mt-2"></div>
+      </div>
+
+      <div class="flex gap-2">
+        <button id="save-prod" class="flex-1 bg-kampala-accent text-black py-2 rounded font-semibold">Save Product</button>
+        <button id="cancel-edit" class="flex-1 bg-white/10 py-2 rounded">Cancel</button>
+      </div>
+
+      <hr class="my-3 border-white/10">
+
+      <h3 class="font-semibold">Existing Products</h3>
+      <div id="prod-list" class="space-y-3 max-h-64 overflow-auto"></div>
+    </div>
+
+    <div id="loader" class="text-sm text-white/70 mt-4 hidden">Loading…</div>
+  </div>
+
+  <!-- Firebase + admin logic -->
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

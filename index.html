@@ -21,7 +21,7 @@
       },
     }
   </script>
-
+       
   <style>
     body {
       background-color: #102030;
@@ -121,7 +121,22 @@
       </div>
     </div>
   </div>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    // also loaded inside store.js — keep this snippet for clarity; main init happens in store.js
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyaEpXKLbeFCd1dzikTDtHW4UIJcSnNEc",
+      authDomain: "omosquare-fabrics.firebaseapp.com",
+      projectId: "omosquare-fabrics",
+      storageBucket: "omosquare-fabrics.firebasestorage.app",
+      messagingSenderId: "460244510484",
+      appId: "1:460244510484:web:e947ae53c79045b840c401"
+    };
+    initializeApp(firebaseConfig);
+  </script>
 
-  <script src="store.js"></script>
+
+  <script type="module" src="store.js"></script>
 </body>
 </html>
